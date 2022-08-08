@@ -22,7 +22,14 @@ public class Calculator {
     }
 
     public double division(double a, double b) {
+        /* if (a < b) {
+            System.out.println("The Division cannot be performed");
+            return 0;
+        } else {
+            return a / b;
+        } */
         return a / b;
     }
+
 
 }

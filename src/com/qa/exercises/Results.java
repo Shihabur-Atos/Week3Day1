@@ -15,7 +15,7 @@ public class Results {
     }
 
     public static void main(String[] args) {
-        Results myResult = new Results(100,85,65);
+        Results myResult = new Results(84,150,150);
         myResult.printResults();
         myResult.printPercentage();
     }
@@ -30,15 +30,31 @@ public class Results {
     }
 
     public Double calculatePercentage(int value, int total) {
-        return (double) Math.round(cal.multiplication((cal.division(value, total)), 100));
+        return (double) Math.round(cal.multiplication((cal.division(value, total)), 100) * 100) / 100;
     }
 
     public void printPercentage() {
+        Double physicsVal = calculatePercentage(this.physics, MAX_MARKS);
+        Double chemistryVal = calculatePercentage(this.chemistry, MAX_MARKS);
+        Double biologyVal = calculatePercentage(this.biology, MAX_MARKS);
+        Double totalVal = calculatePercentage(this.total, cal.multiplication(MAX_MARKS, 3));
+
         System.out.println("Your Results in %: " +
-                "Physics = " +  + calculatePercentage(this.physics, MAX_MARKS) +
-                "%, Chemistry = " + calculatePercentage(this.chemistry,MAX_MARKS) +
-                "%, Biology = " + calculatePercentage(this.biology, MAX_MARKS) +
-                "%, Total = " + calculatePercentage(this.total, cal.multiplication(MAX_MARKS, 3)) + "%");
+                "Physics = " +  + physicsVal +
+                "%, Chemistry = " + chemistryVal +
+                "%, Biology = " + biologyVal +
+                "%, Total = " + totalVal + "%");
+
+        if(physicsVal < 60 && chemistryVal < 60 && biologyVal < 60) {
+            System.out.println("You failed all your modules.");
+        } else if(physicsVal < 60 && (chemistryVal < 60 || biologyVal < 60)) {
+            System.out.println("Due to physics and another module, you have failed");
+        }else if(physicsVal < 60 || chemistryVal < 60 || biologyVal < 60) {
+            System.out.println("Due to failing one or more of your courses being below 60%, you have failed");
+        } else if(totalVal < 60.00) {
+            System.out.println("Based on your total % grade, you have failed");
+        }
+
     }
 
 }
