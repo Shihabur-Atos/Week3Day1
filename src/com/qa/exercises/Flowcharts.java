@@ -71,5 +71,4 @@ public class Flowcharts {
         return sum;
     }
 
-
 }

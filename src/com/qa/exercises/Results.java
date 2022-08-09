@@ -1,10 +1,7 @@
 package com.qa.exercises;
 
 public class Results {
-    int physics;
-    int chemistry;
-    int biology;
-    int total;
+    int physics, chemistry, biology, total;
     Calculator cal = new Calculator();
     static final int MAX_MARKS = 150;
 
@@ -15,7 +12,7 @@ public class Results {
     }
 
     public static void main(String[] args) {
-        Results myResult = new Results(84,150,150);
+        Results myResult = new Results(84,84,50);
         myResult.printResults();
         myResult.printPercentage();
     }
@@ -40,21 +37,31 @@ public class Results {
         Double totalVal = calculatePercentage(this.total, cal.multiplication(MAX_MARKS, 3));
 
         System.out.println("Your Results in %: " +
-                "Physics = " +  + physicsVal +
+                "Physics = " + +physicsVal +
                 "%, Chemistry = " + chemistryVal +
                 "%, Biology = " + biologyVal +
                 "%, Total = " + totalVal + "%");
 
-        if(physicsVal < 60 && chemistryVal < 60 && biologyVal < 60) {
-            System.out.println("You failed all your modules.");
-        } else if(physicsVal < 60 && (chemistryVal < 60 || biologyVal < 60)) {
-            System.out.println("Due to physics and another module, you have failed");
-        }else if(physicsVal < 60 || chemistryVal < 60 || biologyVal < 60) {
-            System.out.println("Due to failing one or more of your courses being below 60%, you have failed");
-        } else if(totalVal < 60.00) {
-            System.out.println("Based on your total % grade, you have failed");
+        if (totalVal < 60.00) {
+            System.out.print("You have failed due to your total percentage, please see below why:\n");
         }
-
+        if (physicsVal < 60 && chemistryVal < 60 && biologyVal < 60) {
+            System.out.print("You failed all your modules.");
+        } else if (physicsVal < 60 || biologyVal < 60 || chemistryVal < 60) {
+            System.out.println("Due to: ");
+            if (biologyVal < 60) {
+                System.out.println("Biology");
+            }
+            if (chemistryVal < 60) {
+                System.out.println("Chemistry ");
+            }
+            if(physicsVal < 60) {
+                System.out.println("Physics");
+            }
+            System.out.println("You have failed unfortunately");
+        } else {
+            System.out.println("You have passed. Congratulations");
+        }
     }
 
 }
